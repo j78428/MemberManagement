@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>會員管理系統</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <script src="script/jquery-1.10.2.min.js"></script>
+    <script src="script/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="script/bootstrap.min.js"></script>
+    <script src="script/main.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="bg_1">
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header visible-xs">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs" href="order_list_all.html">公司資料</a>
+                    <div class="page_list hidden-xs">
+                        <!-- Web use - page nav -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn_style1  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                全部訂單 <span class="glyphicon glyphicon-align-justify"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">飯店訂房</a></li>
+                                <li><a href="#">機票定位</a></li>
+                                <li><a href="#">自由行</a></li>
+                                <li><a href="#">旅遊票券</a></li>
+                                <li><a href="#">其他</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- page_list : END -->
+                </div>
+                <div class="navbar-collapse collapse">
+                    <!-- Mobile use - page nav -->
+                    <ul class="nav navbar-nav" style="display:none;">
+                        <li class="active"><a href="order_list_all.html">全部訂單</a></li>
+                        <li><a href="order_list_hotel.html">飯店訂房</a></li>
+                        <li><a href="order_list_flight.html">機票訂位</a></li>
+                        <li><a href="order_list_pkg.html">自由行</a></li>
+                        <li><a href="order_list_ticket.html">旅遊票券</a></li>
+                    </ul>
+                    <!-- Web use - 搜尋訂單編號&登出 -->
+                    <div class="hidden-xs">
+                        <div class="member_function pull-right">
+                            <a href="" class="logout">登出</a>
+                            <div class="member_name hidden-xs"><span class="glyphicon glyphicon-user"></span> 帳號10101 /</div>
+                        </div>
+                        <div class="col-sm-8 col-md-5 company_search" style="display:none;">
+                            <input type="text" placeholder="搜尋統一編號">
+                            <button class="btn btn-lg btn_style1"><span class="glyphicon glyphicon-search"></span> <span class="btn_title">搜尋</span></button>
+                        </div>
+                        <div class="col-sm-12 col-md-2 create_company" style="display:none;">
+                            <button class="btn btn-lg btn_style1" data-toggle="modal" data-target="#CreateCompany"><span class="glyphicon glyphicon-plus"></span> 建立公司</button>
+                        </div>
+                    </div>
+                    <!-- Mobile use - 搜尋訂單編號&登出 -->
+                    <div class="visible-xs">
+                        <div class="col-xs-9 company_search" style="display:none;">
+                            <input type="text" placeholder="搜尋統一編號">
+                            <button class="btn btn-lg btn_style1"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <div class="col-xs-3 create_company" style="display:none;">
+                            <button class="btn btn-lg btn_style1" data-toggle="modal" data-target="#CreateCompany"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                        <div class="col-xs-12 member_function">
+                            <a href="" class="btn btn-lg btn_style3 logout">登出</a>
+                        </div>
+                    </div>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+    </header>
+    <div class="main_content">
+        <div class="container">
+            <div class="search_form">
+                <h2 class="form_title">查詢公司</h2>
+                <div class="fill_form">
+                    <div class="fill_item">
+                        <div class="item_content">
+                            <input type="text" class="form-control tooltip_style" placeholder="請輸入公司統編" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                        </div>
+                    </div>
+                </div>
+                <!-- .fill_form : END -->
+                <div class="button_group">
+                    <a href="company_detail.html" class="btn btn-lg btn_style1">查詢</a>
+                    <div class="delimited_word">或</div>
+                    <button class="btn btn-lg btn_style2" data-toggle="modal" data-target="#CreateCompany">新建公司</button>
+                </div>
+            </div>
+        </div><div class="modal form_modal fade" id="CreateCompany" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body form_content">
+                        <h4 class="modal-title">公司資料</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*統一編號</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="請輸入公司統編" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司全名</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="公司中文全名" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司簡稱</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="中文簡稱" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*英文全名</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="Company Name CO., LTD." data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*英文名稱</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="Company Name" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*負責人</span></label>
+                                        <div class="item_content">
+                                            <div class="name_input">
+                                                <input type="text" class="form-control tooltip_style" placeholder="名字" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                                <input type="text" class="form-control tooltip_style" placeholder="姓氏" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <h4 class="form_title">聯絡資料</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司地址</span></label>
+                                        <div class="item_content">
+                                            <div class="address_input">
+                                                <select name="country" class="form-control country_input">
+                                                    <option value="">台灣</option>
+                                                </select>
+                                                <select name="city" class="form-control city_input">
+                                                    <option value="">縣市</option>
+                                                    <option value="基隆市">基隆市</option>
+                                                    <option value="台北市">台北市</option>
+                                                    <option value="新北市">新北市</option>
+                                                    <option value="宜蘭縣">宜蘭縣</option>
+                                                    <option value="新竹市">新竹市</option>
+                                                    <option value="新竹縣">新竹縣</option>
+                                                    <option value="桃園市">桃園市</option>
+                                                    <option value="苗栗縣">苗栗縣</option>
+                                                    <option value="台中市">台中市</option>
+                                                    <option value="彰化縣">彰化縣</option>
+                                                    <option value="南投縣">南投縣</option>
+                                                    <option value="嘉義市">嘉義市</option>
+                                                    <option value="嘉義縣">嘉義縣</option>
+                                                    <option value="雲林縣">雲林縣</option>
+                                                    <option value="台南市">台南市</option>
+                                                    <option value="高雄市">高雄市</option>
+                                                    <option value="屏東縣">屏東縣</option>
+                                                    <option value="台東縣">台東縣</option>
+                                                    <option value="花蓮縣">花蓮縣</option>
+                                                    <option value="金門縣">金門縣</option>
+                                                    <option value="連江縣">連江縣</option>
+                                                    <option value="澎湖縣">澎湖縣</option>
+                                                </select>
+                                                <select name="district" class="form-control district_input">
+                                                    <option value="">地區</option>
+                                                    <option value="中正區">中正區</option>
+                                                    <option value="大安區">大安區</option>
+                                                    <option value="松山區">松山區</option>
+                                                </select>
+                                                <input type="text" class="form-control tooltip_style zipcode_input" placeholder="郵遞區域" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" readonly="">
+                                                <input type="text" class="form-control tooltip_style" placeholder="地址" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*發票地址</span></label>
+                                        <button class="btn btn-sm btn_style2">複製公司地址</button>
+                                        <div class="item_content">
+                                            <div class="address_input">
+                                                <select name="country" class="form-control country_input">
+                                                    <option value="">台灣</option>
+                                                </select>
+                                                <select name="city" class="form-control city_input">
+                                                    <option value="">縣市</option>
+                                                    <option value="基隆市">基隆市</option>
+                                                    <option value="台北市">台北市</option>
+                                                    <option value="新北市">新北市</option>
+                                                    <option value="宜蘭縣">宜蘭縣</option>
+                                                    <option value="新竹市">新竹市</option>
+                                                    <option value="新竹縣">新竹縣</option>
+                                                    <option value="桃園市">桃園市</option>
+                                                    <option value="苗栗縣">苗栗縣</option>
+                                                    <option value="台中市">台中市</option>
+                                                    <option value="彰化縣">彰化縣</option>
+                                                    <option value="南投縣">南投縣</option>
+                                                    <option value="嘉義市">嘉義市</option>
+                                                    <option value="嘉義縣">嘉義縣</option>
+                                                    <option value="雲林縣">雲林縣</option>
+                                                    <option value="台南市">台南市</option>
+                                                    <option value="高雄市">高雄市</option>
+                                                    <option value="屏東縣">屏東縣</option>
+                                                    <option value="台東縣">台東縣</option>
+                                                    <option value="花蓮縣">花蓮縣</option>
+                                                    <option value="金門縣">金門縣</option>
+                                                    <option value="連江縣">連江縣</option>
+                                                    <option value="澎湖縣">澎湖縣</option>
+                                                </select>
+                                                <select name="district" class="form-control district_input">
+                                                    <option value="">地區</option>
+                                                    <option value="中正區">中正區</option>
+                                                    <option value="大安區">大安區</option>
+                                                    <option value="松山區">松山區</option>
+                                                </select>
+                                                <input type="text" class="form-control tooltip_style zipcode_input" placeholder="郵遞區域" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" readonly="">
+                                                <input type="text" class="form-control tooltip_style" placeholder="地址" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*英文地址</span></label>
+                                        <div class="item_content">
+                                            <div class="address_input">
+                                                <input type="text" class="form-control tooltip_style" placeholder="Address" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                                <select name="district" class="form-control district_input">
+                                                    <option value="">District</option>
+                                                    <option value="">Zhongzheng Dist</option>
+                                                </select>
+                                                <select name="city" class="form-control city_input">
+                                                    <option value="">City</option>
+                                                    <option value="">Taipei</option>
+                                                </select>
+                                                <select name="country" class="form-control country_input">
+                                                    <option value="">Taiwan</option>
+                                                </select>
+                                                <input type="text" class="form-control tooltip_style zipcode_input" placeholder="Zip Code" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" readonly="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <br>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司電話</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style telephone_num" placeholder="請輸入電話" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司傳真</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style telephone_num" placeholder="請輸入電話" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*Email 1</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="example@mail.com" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title">備註1</label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="請輸入" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <!-- .fill_form : END -->
+                        <h4 class="form_title">聯絡人</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*聯絡人名字</span></label>
+                                        <div class="item_content">
+                                            <div class="name_input">
+                                                <input type="text" class="form-control tooltip_style" placeholder="名字" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                                <input type="text" class="form-control tooltip_style" placeholder="姓氏" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*連絡電話</span></label>
+                                        <div class="item_content">
+                                            <div class="telephone_input_2">
+                                                <input type="text" class="form-control tooltip_style telephone_num" placeholder="請輸入電話" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                                <input type="text" class="form-control tooltip_style extension_num" placeholder="分機" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*Email</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="example@mail.com" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <!-- .fill_form : END -->
+                        <h4 class="form_title">群組</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*群組名稱</span></label>
+                                        <div class="item_content">
+                                            <div class="spacial_input">
+                                                <input type="text" class="form-control tooltip_style" placeholder="請輸入名稱" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                                <button class="btn btn_style3" style="display:none;"><span class="glyphicon glyphicon-minus"></span> 刪除</button>
+                                                <!-- 
+                                        NOTE:
+                                        若只剩1個項目時，"刪除"按鈕隱藏 
+                                        -->
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                    <button class="btn btn_style2"><span class="glyphicon glyphicon-plus"></span> 增加</button>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+                <!-- .modal-content : END -->
+            </div>
+            <div class="modal_bottom">
+                <div class="bottom_content">
+                    <button type="button" class="btn btn-lg btn_style2" id="" data-dismiss="modal" data-toggle="modal" data-target="#EditCompany">建立完整資訊</button>
+                    <button type="button" class="btn btn-lg btn_style1" id="CheckCreate" data-dismiss="modal">確認建立</button>
+                </div>
+            </div>
+        </div>
+        <!-- #CreateCompany : END -->
+        <div class="modal form_modal fade" id="EditCompany" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body form_content">
+                        <h4 class="form_title">公司資料</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title">統一編號</label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="請輸入公司統編" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="22765678" readonly="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司全名</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="公司中文全名" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="雄大旅行社有限公司">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司簡稱</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="中文簡稱" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="雄大旅遊">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*英文全名</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="Company Name CO., LTD." data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*英文名稱</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="Company Name" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*負責人</span></label>
+                                        <div class="item_content">
+                                            <div class="name_input">
+                                                <input type="text" class="form-control tooltip_style" placeholder="名字" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="大名">
+                                                <input type="text" class="form-control tooltip_style" placeholder="姓氏" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="王">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <h4 class="form_title">聯絡資料</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司地址</span></label>
+                                        <div class="item_content">
+                                            <div class="address_input">
+                                                <select name="country" class="form-control country_input">
+                                                    <option value="">台灣</option>
+                                                </select>
+                                                <select name="city" class="form-control city_input">
+                                                    <option value="">縣市</option>
+                                                    <option value="基隆市">基隆市</option>
+                                                    <option value="台北市" selected="">台北市</option>
+                                                    <option value="新北市">新北市</option>
+                                                    <option value="宜蘭縣">宜蘭縣</option>
+                                                    <option value="新竹市">新竹市</option>
+                                                    <option value="新竹縣">新竹縣</option>
+                                                    <option value="桃園市">桃園市</option>
+                                                    <option value="苗栗縣">苗栗縣</option>
+                                                    <option value="台中市">台中市</option>
+                                                    <option value="彰化縣">彰化縣</option>
+                                                    <option value="南投縣">南投縣</option>
+                                                    <option value="嘉義市">嘉義市</option>
+                                                    <option value="嘉義縣">嘉義縣</option>
+                                                    <option value="雲林縣">雲林縣</option>
+                                                    <option value="台南市">台南市</option>
+                                                    <option value="高雄市">高雄市</option>
+                                                    <option value="屏東縣">屏東縣</option>
+                                                    <option value="台東縣">台東縣</option>
+                                                    <option value="花蓮縣">花蓮縣</option>
+                                                    <option value="金門縣">金門縣</option>
+                                                    <option value="連江縣">連江縣</option>
+                                                    <option value="澎湖縣">澎湖縣</option>
+                                                </select>
+                                                <select name="district" class="form-control district_input">
+                                                    <option value="">地區</option>
+                                                    <option value="中正區">中正區</option>
+                                                    <option value="大安區">大安區</option>
+                                                    <option value="松山區" selected="">松山區</option>
+                                                </select>
+                                                <input type="text" class="form-control tooltip_style zipcode_input" placeholder="郵遞區域" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" readonly="" value="10552">
+                                                <input type="text" class="form-control tooltip_style" placeholder="地址" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="復興北路69號6樓">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*發票地址</span></label>
+                                        <button class="btn btn-sm btn_style2">複製公司地址</button>
+                                        <div class="item_content">
+                                            <div class="address_input">
+                                                <select name="country" class="form-control country_input">
+                                                    <option value="">台灣</option>
+                                                </select>
+                                                <select name="city" class="form-control city_input">
+                                                    <option value="">縣市</option>
+                                                    <option value="基隆市">基隆市</option>
+                                                    <option value="台北市" selected="">台北市</option>
+                                                    <option value="新北市">新北市</option>
+                                                    <option value="宜蘭縣">宜蘭縣</option>
+                                                    <option value="新竹市">新竹市</option>
+                                                    <option value="新竹縣">新竹縣</option>
+                                                    <option value="桃園市">桃園市</option>
+                                                    <option value="苗栗縣">苗栗縣</option>
+                                                    <option value="台中市">台中市</option>
+                                                    <option value="彰化縣">彰化縣</option>
+                                                    <option value="南投縣">南投縣</option>
+                                                    <option value="嘉義市">嘉義市</option>
+                                                    <option value="嘉義縣">嘉義縣</option>
+                                                    <option value="雲林縣">雲林縣</option>
+                                                    <option value="台南市">台南市</option>
+                                                    <option value="高雄市">高雄市</option>
+                                                    <option value="屏東縣">屏東縣</option>
+                                                    <option value="台東縣">台東縣</option>
+                                                    <option value="花蓮縣">花蓮縣</option>
+                                                    <option value="金門縣">金門縣</option>
+                                                    <option value="連江縣">連江縣</option>
+                                                    <option value="澎湖縣">澎湖縣</option>
+                                                </select>
+                                                <select name="district" class="form-control district_input">
+                                                    <option value="">地區</option>
+                                                    <option value="中正區">中正區</option>
+                                                    <option value="大安區">大安區</option>
+                                                    <option value="松山區" selected="">松山區</option>
+                                                </select>
+                                                <input type="text" class="form-control tooltip_style zipcode_input" placeholder="郵遞區域" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" readonly="" value="10552">
+                                                <input type="text" class="form-control tooltip_style" placeholder="地址" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="復興北路69號6樓">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*英文地址</span></label>
+                                        <div class="item_content">
+                                            <div class="address_input">
+                                                <input type="text" class="form-control tooltip_style" placeholder="Address" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                                <select name="district" class="form-control district_input">
+                                                    <option value="">District</option>
+                                                    <option value="">Zhongzheng Dist</option>
+                                                </select>
+                                                <select name="city" class="form-control city_input">
+                                                    <option value="">City</option>
+                                                    <option value="">Taipei</option>
+                                                </select>
+                                                <select name="country" class="form-control country_input">
+                                                    <option value="">Taiwan</option>
+                                                </select>
+                                                <input type="text" class="form-control tooltip_style zipcode_input" placeholder="Zip Code" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" readonly="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <br>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司電話</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style telephone_num" placeholder="請輸入電話" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="0227765678">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-4">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*公司傳真</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style telephone_num" placeholder="請輸入電話" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title">國外連絡電話</label>
+                                        <div class="item_content">
+                                            <div class="telephone_input_2">
+                                                <input type="text" class="form-control tooltip_style telephone_num" placeholder="請輸入電話" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                                <input type="text" class="form-control tooltip_style extension_num" placeholder="分機" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <br>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*Email 1</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="example@mail.com" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="service@mail.com">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title">Email 2</label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="example@mail.com" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <h4 class="form_title">聯絡人</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*聯絡人名字</span></label>
+                                        <div class="item_content">
+                                            <div class="name_input">
+                                                <input type="text" class="form-control tooltip_style" placeholder="名字" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="大名">
+                                                <input type="text" class="form-control tooltip_style" placeholder="姓氏" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="王">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*連絡電話</span></label>
+                                        <div class="item_content">
+                                            <div class="telephone_input_2">
+                                                <input type="text" class="form-control tooltip_style telephone_num" placeholder="請輸入電話" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="0227765678">
+                                                <input type="text" class="form-control tooltip_style extension_num" placeholder="分機" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                            </div>
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="fill_item">
+                                        <label class="item_title"><span>*Email</span></label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="example@mail.com" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="" value="wang@mail.com">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <h4 class="form_title">其他</h4>
+                        <div class="fill_form">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title">備註1</label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="請輸入" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title">備註2</label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="請輸入" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                                <div class="clearfix hidden-xs"></div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="fill_item">
+                                        <label class="item_title">備註3</label>
+                                        <div class="item_content">
+                                            <input type="text" class="form-control tooltip_style" placeholder="請輸入" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="">
+                                        </div>
+                                        <div class="error_message">錯誤訊息</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- .fill_form : END -->
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+                <!-- .modal-content : END -->
+            </div>
+            <div class="modal_bottom">
+                <div class="bottom_content">
+                    <button type="button" class="btn btn-lg btn_style1" id="CheckCreate" data-dismiss="modal">確認</button>
+                </div>
+            </div>
+        </div>
+        <!-- #EditCompany : END -->
+    </div>
+    <!-- .main_content : END -->
+</body>
+
+</html>
